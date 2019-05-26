@@ -30,8 +30,8 @@ public class RepositoryTools extends Repository {
         try {
             FileWriter writer = new FileWriter(fileName, true); // append true is writing from next position
             writer.append(message + SEPARATOR + respond + NEW_LINE);
-            System.out.println("Successfully wrote to the file.");
             writer.flush(); //method flushes the stream.
+            commandLineUserInterface.output("Your response successfully written in the repository.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -72,7 +72,7 @@ public class RepositoryTools extends Repository {
                     }
                 }
             } else {
-                commandLineUserInterface.output("The repository is empty.");
+                commandLineUserInterface.output("The bot repository is empty.");
             }
             reader.close();
         } catch (IOException e) {
@@ -90,15 +90,6 @@ public class RepositoryTools extends Repository {
         return false;
     }
 
-//    public boolean ask(User user) {
-//        if (containsKey(user.getUsername())) {
-//            User userObj = (User) RepositoryTools.getInstance().get(user.getUsername(), USER_REPO_PATH);
-//            if (user.getUsername().equals(userObj.getUsername()) && user.getPassword().equals(userObj.getPassword()))
-//                return true;
-//        }
-//        return false;
-//    }
-
     public String searchRespond(String message, String fileName) {
         if (containsKey(message, CHATBOT_REPO_PATH)) {
             try {
@@ -107,7 +98,7 @@ public class RepositoryTools extends Repository {
                 while (myReader.hasNextLine()) {
                     String data = myReader.nextLine();
                     String[] parts = data.split(SEPARATOR);
-                    if (message.equals(parts[0]))
+                    if (message.equalsIgnoreCase(parts[0]))
                         return parts[1];
                 }
                 myReader.close();
@@ -116,11 +107,15 @@ public class RepositoryTools extends Repository {
                 e.printStackTrace();
             }
         } else {
-            commandLineUserInterface.output("Please enter the Respond:");
-            String respond = commandLineUserInterface.readStr();
-            add(message, respond);
+            getRespond(message);
         }
         return null;
+    }
+
+    private void getRespond(String message) {
+        commandLineUserInterface.output("I have no idea what to respond. Please enter the respond.");
+        String respond = commandLineUserInterface.readStr();
+        add(message, respond);
     }
 
 }

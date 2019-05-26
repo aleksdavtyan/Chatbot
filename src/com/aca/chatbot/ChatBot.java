@@ -1,5 +1,6 @@
 package com.aca.chatbot;
 
+import com.aca.chatbot.calculator.Calculator;
 import com.aca.chatbot.repository.RepositoryTools;
 import com.aca.chatbot.ui.CommandLineUserInterface;
 
@@ -22,14 +23,30 @@ public class ChatBot {
 
 
     public void startChat() {
+        boolean chatting = true;
+        String message;
+        commandLineUserInterface.output("Hi, I'm a Chat bot.\n--------------------------------" +
+                "\n|Instruction| Type 'q' to quit.\nType your message or app name to start.\n--------------------------------");
+        while (chatting) {
+            message = commandLineUserInterface.readStr();
+            if (!message.equals("q")) {
+                switch (message) {
+                    case "Calculator":
+                        Calculator.getCalculatorInstance().startCalculator();
+                        break;
+                    case "TicTacToe":
 
-        commandLineUserInterface.output("Hi, I'm a Chat bot. Please enter your message or order.");
-        String message = commandLineUserInterface.readStr();
-        String respond = RepositoryTools.getInstance().searchRespond(message, CHATBOT_REPO_PATH);
-        if (respond != null) {
-            commandLineUserInterface.output(respond);
+                        break;
+                    default:
+                        break;
+                }
+                String respond = RepositoryTools.getInstance().searchRespond(message, CHATBOT_REPO_PATH);
+                if (respond != null) {
+                    commandLineUserInterface.output(respond);
+                }
+            } else {
+                chatting = false;
+            }
         }
-
-        //ChatBot.getChatBotInstance().add("Hi", "Hi");
     }
 }

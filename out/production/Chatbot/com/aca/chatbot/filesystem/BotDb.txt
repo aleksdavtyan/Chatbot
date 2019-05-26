@@ -1,1 +1,3 @@
 Hi-Hello
+How are you?-I'm good, what about you?
+How Are you?-I'm fine.
