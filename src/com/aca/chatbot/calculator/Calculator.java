@@ -7,12 +7,12 @@ public class Calculator {
     CommandLineUserInterface commandLineUserInterface = new CommandLineUserInterface();
     private static Calculator calculatorInstance = new Calculator();
 
+    private Calculator() { }
+
     public static Calculator getCalculatorInstance() {
         return calculatorInstance;
     }
 
-    private Calculator() {
-    }
 
     public void startCalculator() {
         commandLineUserInterface.output("Please enter the arithmetic expression: ");

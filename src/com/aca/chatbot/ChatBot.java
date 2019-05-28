@@ -2,6 +2,7 @@ package com.aca.chatbot;
 
 import com.aca.chatbot.calculator.Calculator;
 import com.aca.chatbot.repository.RepositoryTools;
+import com.aca.chatbot.tictactoe.TicTacToe;
 import com.aca.chatbot.ui.CommandLineUserInterface;
 
 public class ChatBot {
@@ -28,14 +29,14 @@ public class ChatBot {
         commandLineUserInterface.output("Hi, I'm a Chat bot.\n--------------------------------" +
                 "\n|Instruction| Type 'q' to quit.\nType your message or app name to start.\n--------------------------------");
         while (chatting) {
-            message = commandLineUserInterface.readStr();
+            message = commandLineUserInterface.readStr().toLowerCase();
             if (!message.equals("q")) {
                 switch (message) {
-                    case "Calculator":
+                    case "calculator":
                         Calculator.getCalculatorInstance().startCalculator();
                         break;
-                    case "TicTacToe":
-
+                    case "tictactoe":
+                        TicTacToe.getTicTacToeInstance().startTicTacToe();
                         break;
                     default:
                         break;

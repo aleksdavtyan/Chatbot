@@ -98,7 +98,7 @@ public class RepositoryTools extends Repository {
                 while (myReader.hasNextLine()) {
                     String data = myReader.nextLine();
                     String[] parts = data.split(SEPARATOR);
-                    if (message.equalsIgnoreCase(parts[0]))
+                    if (message.equals(parts[0].toLowerCase()))
                         return parts[1];
                 }
                 myReader.close();
