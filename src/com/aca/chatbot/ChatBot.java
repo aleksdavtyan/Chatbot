@@ -34,9 +34,11 @@ public class ChatBot {
                 switch (message) {
                     case "calculator":
                         Calculator.getCalculatorInstance().startCalculator();
+                        message = commandLineUserInterface.readStr().toLowerCase();
                         break;
                     case "tictactoe":
                         TicTacToe.getTicTacToeInstance().startTicTacToe();
+                        message = commandLineUserInterface.readStr().toLowerCase();
                         break;
                     default:
                         break;
